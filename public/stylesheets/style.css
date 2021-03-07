@@ -1,0 +1,46 @@
+/* body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+} */
+ul{
+  width: -webkit-fill-available;
+  justify-content: space-evenly;
+}
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 150px;
+
+}
+
+.mb-12{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.form-label{
+  padding: 10px;
+  font-size: 20px;
+  color: #6547ab;
+}
+input, select{
+  font-size: 20px;
+  letter-spacing: 2px;
+}
+
+form button {
+  width: -webkit-fill-available;
+}
+.flight{
+  margin: 50px;
+}
+.card{
+  margin: 10px;
+}
