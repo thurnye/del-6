@@ -5,7 +5,6 @@ const Flight = require('../model/model');
 
 exports.getIndex = (req, res, next) => {
   Flight.find().sort({departs: 'asc'})
-  
   .then(flight => {
     res.render('index', {
       pageTitle: 'Flights',
@@ -54,6 +53,16 @@ exports.getEditFlight = (req, res) => {
   .then(flight => {
     // console.log(flight)
     let departDate = flight.departs.toISOString().slice(0, 16) 
+
+    console.log(flight.departs.getFullYear())
+    console.log(new Date().getFullYear())
+   
+    flight.departs.getFullYear() !== new Date().getFullYear() ? console.log(true) : console.log(falsse)
+
+
+
+
+
   res.render('editSingleFlight',{
     pageTitle: 'Flight Details',
     flight: flight,
