@@ -44,3 +44,8 @@ form button {
 .card{
   margin: 10px;
 }
+
+
+.dateError{
+  color: salmon
+}

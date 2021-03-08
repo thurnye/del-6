@@ -4,7 +4,8 @@ const Flight = require('../model/model');
 
 
 exports.getIndex = (req, res, next) => {
-  Flight.find()
+  Flight.find().sort({departs: 'asc'})
+  
   .then(flight => {
     res.render('index', {
       pageTitle: 'Flights',
@@ -15,8 +16,12 @@ exports.getIndex = (req, res, next) => {
 }
 
 exports.getForm = (req, res, next) => {
+  let d = new Date()
+  d.setFullYear(new Date().getFullYear() -1)
+  console.log(d.toISOString().slice(0, 16))
   res.render('newFlight', { 
-      title: 'New Flight' 
+      title: 'New Flight',
+      depart: d.toISOString().slice(0, 16) 
   });
 }
 

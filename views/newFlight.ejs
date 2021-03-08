@@ -30,9 +30,6 @@
                         <option value="United">United</option>
                       </select>
                 </div> 
-
-               
-
                 <div class="mb-12">
                     <label for="exampleFormControlInput1" class="form-label"> Flight No.</label>
                     <input type="number" class="form-control" id="exampleFormControlInput1" name="flightNo">
@@ -40,7 +37,7 @@
 
                 <div class="mb-12">
                     <label for="exampleFormControlInput1" class="form-label"> Departure Date</label>
-                    <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1">
+                    <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1" value= <%= depart %> >
                 </div>
                 <button type="submit" class="btn btn-secondary btn-lg" >Add Flight</button>
         </form>
