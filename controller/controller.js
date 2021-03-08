@@ -35,7 +35,7 @@ exports.postForm = (req, res, next) => {
     airline : airline,
     airport : airport,
     flightNo : flightNo,
-    depart: depart 
+    departs: depart 
   })
  flight.save()
  .then(flight => {
@@ -50,13 +50,20 @@ exports.postForm = (req, res, next) => {
 //get a single flight
 
 exports.getOneFlight = (req, res) => {
-  // let id = req.params
-  let d = new Date()
-  d.setFullYear(new Date().getFullYear() -1)
+  let id = req.params.id
+  // console.log(id)
+  Flight.findById(id)
+  .then(flight => {
+    // console.log(flight)
+    let d = flight.departs
+    // console.log(d)
   res.render('singleFlight',{
     pageTitle: "Single Flight",
     depart: d.toISOString().slice(0, 16),
+    flight: flight
   })
+  })
+  
 }
 
 
@@ -68,8 +75,8 @@ exports.getEditFlight = (req, res) => {
     // console.log(flight)
     let departDate = flight.departs.toISOString().slice(0, 16) 
 
-    console.log(flight.departs.getFullYear())
-    console.log(new Date().getFullYear())
+    // console.log(flight.departs.getFullYear())
+    // console.log(new Date().getFullYear())
    
     // flight.departs.getFullYear() !== new Date().getFullYear() ? console.log(true) : console.log(falsse)
 
@@ -108,4 +115,15 @@ exports.postEditUpdate = (req, res) => {
   })
 }
 
+//Delete one
 
+exports.deleteFlight = (req, res) => {
+  const id = req.body.flightId
+  console.log(id)
+  Flight.findByIdAndDelete(id)
+  .then(result => {
+    console.log('Destroyed')
+    res.redirect('/')
+  })
+  .catch(err =>  console.log(err))
+}

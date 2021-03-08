@@ -4,44 +4,31 @@
 <%- include('./includes/navigation.ejs') %> 
 
    <main>
-       <h1>ADD FLIGHT</h1>
+       <h1>Flight Details</h1>
         <div class="card" style="width: 450px;">
-           
-            <form action="/add-flight" method="POST">
-
                 <div class="mb-12">
-                    <label for="airport" class="form-label">Airport</label>
-                    <select class="form-select" name="airport" aria-label="Default select example">
-                        <option selected>select airport...</option>
-                        <option value="AUS"> AUS</option>
-                        <option value="DFW"> DFW</option>
-                        <option value="DEN"> DEN</option>
-                        <option value="LAX"> LAX</option>
-                        <option value="SAN"> SAN</option>
-                    </select>
+                    <h1>Airport : <%= flight.airport %> 
                 </div> 
 
                 <div class="mb-12">
-                    <label for="airline" class="form-label">Airline</label>
-                    <select class="form-select" name="airline" aria-label="Default select example">
-                        <option selected>select airline...</option>
-                        <option value="America">America</option>
-                        <option value="Southwest">Southwest</option>
-                        <option value="United">United</option>
-                      </select>
+                    <h1>Airline : <%= flight.airline %> </h1>
                 </div> 
                 <div class="mb-12">
-                    <label for="exampleFormControlInput1" class="form-label"> Flight No.</label>
-                    <input type="number" class="form-control" id="exampleFormControlInput1" name="flightNo">
+                    <h1>Air No. : <%= flight.flightNo %> 
                 </div>
 
                 <div class="mb-12">
-                    <label for="exampleFormControlInput1" class="form-label"> Departure Date</label>
-                    <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1" value= <%= depart %> >
+                    <h1>Departure : <%= depart%> 
                 </div>
                 
-                <button type="submit" class="btn btn-secondary btn-lg" >Add Flight</button>
-        </form>
+                <div>
+                    <a href="/single-flight/edit/<%= flight._id%>" class="btn btn-primary"> Edit</a>
+
+                    <form action="/single-flight/delete-flight/<%= flight._id%>" method="POST">
+                        <input type="hidden" name="flightId" value=<%= flight._id%> >
+                        <button class="btn btn-danger" type="submit">Delete</button>
+                    </form>
+                </div>
         </div>
    </main>
 

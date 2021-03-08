@@ -15,6 +15,8 @@ router.post('/', controller.postEditUpdate);
 
 router.get('/single-flight/:id', controller.getOneFlight)
 
+router.post('/single-flight/delete-flight/:id', controller.deleteFlight)
+
 
 
 module.exports = router;
