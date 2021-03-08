@@ -18,9 +18,10 @@ exports.getForm = (req, res, next) => {
   let d = new Date()
   d.setFullYear(new Date().getFullYear() -1)
   console.log(d.toISOString().slice(0, 16))
-  res.render('newFlight', { 
+  res.render('editSingleFlight', { 
       title: 'New Flight',
-      depart: d.toISOString().slice(0, 16) 
+      defaultDepart: d.toISOString().slice(0, 16),
+      editing: false 
   });
 }
 
@@ -47,6 +48,19 @@ exports.postForm = (req, res, next) => {
 }
 
 //get a single flight
+
+exports.getOneFlight = (req, res) => {
+  // let id = req.params
+  let d = new Date()
+  d.setFullYear(new Date().getFullYear() -1)
+  res.render('singleFlight',{
+    pageTitle: "Single Flight",
+    depart: d.toISOString().slice(0, 16),
+  })
+}
+
+
+//Edit a single flight
 exports.getEditFlight = (req, res) => {
   let id =  req.params.id
   Flight.findById(id)
@@ -57,11 +71,7 @@ exports.getEditFlight = (req, res) => {
     console.log(flight.departs.getFullYear())
     console.log(new Date().getFullYear())
    
-    flight.departs.getFullYear() !== new Date().getFullYear() ? console.log(true) : console.log(falsse)
-
-
-
-
+    // flight.departs.getFullYear() !== new Date().getFullYear() ? console.log(true) : console.log(falsse)
 
   res.render('editSingleFlight',{
     pageTitle: 'Flight Details',
@@ -78,15 +88,15 @@ exports.postEditUpdate = (req, res) => {
   const updatedAirline = req.body.airline;
   const updatedAirport = req.body.airport;
   const updatedFlightNo = req.body.flightNo;
-  const updatedDepart = req.body.depart;
+  const updatedDepart = req.body.depart; 
   Flight.findById(flightId)
   .then(flight => {
-    // console.log(flight._id)
+    console.log(flight._id)
     if(flight._id.toString() !== flightId.toString()){
       return res.redirect('/');
     }
       flight.airport = updatedAirport;
-      flight.airport = updatedAirport;
+      flight.airline = updatedAirline;
       flight.flightNo = updatedFlightNo;
       flight.departs = updatedDepart
     
@@ -97,3 +107,5 @@ exports.postEditUpdate = (req, res) => {
     res.redirect('/')
   })
 }
+
+

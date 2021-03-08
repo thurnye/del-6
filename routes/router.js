@@ -13,7 +13,7 @@ router.get('/single-flight/edit/:id', controller.getEditFlight);
 
 router.post('/', controller.postEditUpdate);
 
-
+router.get('/single-flight/:id', controller.getOneFlight)
 
 
 

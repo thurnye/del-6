@@ -6,20 +6,15 @@
   
   
 <main>
-    <h1>ADD FLIGHT</h1>
+    <h1><%if (editing) {%> Edit Flight <%}else{%> ADD FLIGHT<% }%></h1>
      <div class="card" style="width: 450px;">
         
-         <form action="/" method="POST">
+         <form action= <%if (editing) {%><%= '/' %> <%}else{%> <%="/add-flight"  %> <% }%>   method="POST">
 
              <div class="mb-12">
                  <label for="airport" class="form-label">Airport</label>
-                 <select class="form-select" name="airport" aria-label="Default select example" value="<%= flight.airport %>">
-                    <option selected> <%if (editing) {%>
-                        <%= flight.airport %> 
-                     <%}else{%>
-                        'select airport...'
-                    <% }%>
-                     </option>
+                 <select class="form-select" name="airport" aria-label="Default select example" value="<%= editing ? flight.airport: "" %>">
+                    <option selected> <%if (editing) {%><%= flight.airport %> <%}else{%>select airport...<% }%></option>
                      <option value="AUS"> AUS</option>
                      <option value="DFW"> DFW</option>
                      <option value="DEN"> DEN</option>
@@ -31,12 +26,7 @@
              <div class="mb-12">
                  <label for="airline" class="form-label">Airline</label>
                  <select class="form-select" name="airline" aria-label="Default select example" >
-                     <option selected> <%if (editing) {%>
-                        <%= flight.airline %> 
-                     <%}else{%>
-                        'select airport...'
-                    <% }%>
-                     </option>
+                     <option selected> <%if (editing) {%><%= flight.airline %> <%}else{%>select airport...<% }%></option>
                      <option value="America">America</option>
                      <option value="Southwest">Southwest</option>
                      <option value="United">United</option>
@@ -47,15 +37,15 @@
 
              <div class="mb-12">
                  <label for="exampleFormControlInput1" class="form-label"> Flight No.</label>
-                 <input type="number" class="form-control" id="exampleFormControlInput1" name="flightNo" value="<%= flight.flightNo %>">
+                 <input type="number" class="form-control" id="exampleFormControlInput1" name="flightNo" value=<%if (editing) {%><%= flight.flightNo %> <%}else{%> <%=" "  %> <% }%> >
              </div>
 
              <div class="mb-12">
                  <label for="exampleFormControlInput1" class="form-label"> Departure Date</label>
-                 <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1" value="<%= depart %>">
+                 <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1" value= <%if (editing) {%><%= depart %> <%}else{%> <%= defaultDepart %> <% }%> >
              </div>
-             <input type="hidden" name="flightId" value=<%= flight._id %> >
-             <button type="submit" class="btn btn-secondary btn-lg" >Update Flight</button>
+             <input type="hidden" name="flightId" value=<%if (editing) {%> <%= flight._id %> <%}else{%> <%=" "  %> <% }%> >
+             <button type="submit" class="btn btn-secondary btn-lg" ><%if (editing) {%> Update Flight <%}else{%> Add Flight<% }%></button>
      </form>
      </div>
 </main>
