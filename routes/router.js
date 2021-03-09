@@ -19,4 +19,6 @@ router.post('/single-flight/delete-flight/:id', controller.deleteFlight)
 
 router.post('/single-flight/:id/add-arrival', controller.postArrival)
 
+router.post('/single-flight/delArrival/', controller.postRemoveSub)
+
 module.exports = router;

@@ -9,7 +9,7 @@
     <h1><%if (editing) {%> Edit Flight <%}else{%> ADD FLIGHT<% }%></h1>
      <div class="card" style="width: 450px;">
         
-         <form action= <%if (editing) {%><%= '/' %> <%}else{%> <%="/add-flight"  %> <% }%>   method="POST">
+        <form action= <%if (editing) {%><%= '/' %> <%}else{%> <%="/add-flight"  %> <% }%>   method="POST">
 
              <div class="mb-12">
                  <label for="airport" class="form-label">Airport</label>

@@ -77,3 +77,8 @@ section{
 hr{
   border:2px solid black
 }
+
+.removeSub button{
+  width: fit-content;
+  float: right;
+}

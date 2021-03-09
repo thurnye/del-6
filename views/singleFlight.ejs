@@ -27,17 +27,22 @@
                 <hr>
 
                 <% if(flight.destinations.length > 0){ %> 
-                    <% flight.destinations.forEach(el => {%> 
-                <div class="mb-12 list">
-                    <h3 class="col-6">AirPort : </h3>
-                    <p class="col-6"><%= el.airport %> </p>
-                </div>
+                    <% flight.destinations.forEach(el => {%>
+                        <form action='/single-flight/delArrival' method='POST' class="removeSub">
+                            <input type="hidden"  name="delArrival" value=<%= el._id %> >
+                            <input type="hidden"  name="parent" value=<%= parentId %> >
+                            <button type="submit" class="btn btn-danger"> X </button>
+                        </form>
+                        <div class="mb-12 list">
+                            <h3 class="col-6">AirPort : </h3>
+                            <p class="col-6"><%= el.airport %> </p>
+                        </div>
 
-                <div class="mb-12 list">
-                    <h3 class="col-6">Depart:</h3>
-                    <p class="col-6"><%= el.date %>  </p>
-                </div>
-                <% }); %> 
+                        <div class="mb-12 list">
+                            <h3 class="col-6">Depart:</h3>
+                            <p class="col-6"><%= el.date %>  </p>
+                        </div>
+                    <% }); %> 
                 <% } else { %> 
                     <h3>Please add destination...</h3>
                 <% } %> 

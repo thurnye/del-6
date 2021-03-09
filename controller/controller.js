@@ -51,10 +51,10 @@ exports.postForm = (req, res, next) => {
 
 exports.getOneFlight = (req, res) => {
   let id = req.params.id
-  // console.log(id)
+  console.log(id)
   Flight.findById(id)
   .then(flight => {
-    // console.log(flight)
+    console.log(flight)
     let d = flight.departs
     let date = `${d.getFullYear()}-${d.getMonth()}-${d.getDay()}`;
     let time = `${d.getHours()}Hrs ${d.getMinutes()}m`
@@ -62,7 +62,8 @@ exports.getOneFlight = (req, res) => {
     pageTitle: "Single Flight",
     flight: flight,
     depart: date,
-    time: time
+    time: time,
+    parentId: id
   })
   })
   
@@ -79,7 +80,8 @@ exports.getEditFlight = (req, res) => {
     pageTitle: 'Flight Details',
     flight: flight,
     editing: true,
-    depart: departDate
+    depart: departDate,
+    
   })
   })
   .catch(err => console.log(err))
@@ -100,13 +102,29 @@ console.log(arrivalDate, arrivalAirport)
       date: arrivalDate
     })
     result.save()
-    console.log(result._id)
+    // console.log(result._id)
     res.redirect(`/single-flight/${result._id}`)
     // console.log(result)
   })
   .catch(err => console.log(err))
 }
 
+exports.postRemoveSub = (req, res) => {
+  const id = req.body.delArrival
+  const parent = req.body.parent
+  console.log(id)
+
+  // console.log(req)
+  Flight.findById(parent)
+  .then(flight => {
+    console.log(flight)
+    flight.destinations.id(id).remove()
+    flight.save()
+    res.redirect(`/single-flight/${flight._id}`)
+  })
+  .catch(err => console.log(err))
+
+}
 
 
 
