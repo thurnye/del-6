@@ -3,9 +3,9 @@
 
 <%- include('./includes/navigation.ejs') %> 
 
-   <main>
        <h1>Flight Details</h1>
-        <div class="card" style="width: 450px;">
+       <section>
+            <div class="card" style="width: 450px;">
                 <div class="mb-12">
                     <h1>Airport : <%= flight.airport %> 
                 </div> 
@@ -29,8 +29,28 @@
                         <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </div>
-        </div>
-   </main>
+            </div>
+      
+            <form action="/single-flight/<%= flight._id%>/add-arrival" method="POST">
+                <div class="mb-12">
+                    <label for="airline" class="form-label">Airport</label>
+                    <select class="form-select" name="arrivalAirport" aria-label="Default select example" >
+                        <option selected> select airport...</option>
+                        <option value="AUS"> AUS</option>
+                        <option value="DFW"> DFW</option>
+                        <option value="DEN"> DEN</option>
+                        <option value="LAX"> LAX</option>
+                        <option value="SAN"> SAN</option>
+                    </select>
+                </div> 
+                <div class="mb-12">
+                    <label for="exampleFormControlInput1" class="form-label"> Arrival Date</label>
+                    <input type="datetime-local" class="form-control"  name="arrivalDate" id="exampleFormControlInput1">
+                </div>
+                <button type="submit" class="btn btn-secondary btn-lg" >Add Arival</button>
+            </form>
+        </section>
+        
 
 
 <%- include('./includes/footer.ejs') %> 

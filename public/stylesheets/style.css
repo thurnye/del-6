@@ -49,3 +49,9 @@ form button {
 .dateError{
   color: salmon
 }
+
+section{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}

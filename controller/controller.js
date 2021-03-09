@@ -72,14 +72,7 @@ exports.getEditFlight = (req, res) => {
   let id =  req.params.id
   Flight.findById(id)
   .then(flight => {
-    // console.log(flight)
     let departDate = flight.departs.toISOString().slice(0, 16) 
-
-    // console.log(flight.departs.getFullYear())
-    // console.log(new Date().getFullYear())
-   
-    // flight.departs.getFullYear() !== new Date().getFullYear() ? console.log(true) : console.log(falsse)
-
   res.render('editSingleFlight',{
     pageTitle: 'Flight Details',
     flight: flight,
@@ -89,6 +82,34 @@ exports.getEditFlight = (req, res) => {
   })
   .catch(err => console.log(err))
 }
+
+// add arrival
+exports.postArrival = (req, res) => {
+  const id =  req.params.id;
+  const arrivalAirport = req.body.arrivalAirport;
+  const arrivalDate = req.body.arrivalDate
+
+console.log(arrivalDate, arrivalAirport)
+
+  Flight.findById(id)
+  .then(result => {
+    result.destinations.push({
+      airport:arrivalAirport,
+      date: arrivalDate
+    })
+    result.save()
+    console.log(result._id)
+    res.redirect(`/single-flight/${result._id}`)
+    // console.log(result)
+  })
+  .catch(err => console.log(err))
+}
+
+
+
+
+
+
 
 exports.postEditUpdate = (req, res) => {
   const flightId = req.body.flightId
