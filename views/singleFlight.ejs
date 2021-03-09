@@ -5,33 +5,55 @@
 
        <h1>Flight Details</h1>
        <section>
-            <div class="card" style="width: 450px;">
-                <div class="mb-12">
-                    <h1>Airport : <%= flight.airport %> 
+            <div class="card" style="width: 600px;">
+                <div class="col-12 list">
+                    <h3 class="col-6">Airport :  </h3>
+                    <p class="col-6"><%= flight.airport %></p>
                 </div> 
 
-                <div class="mb-12">
-                    <h1>Airline : <%= flight.airline %> </h1>
+                <div class="col-12 list">
+                    <h3 class="col-6">Airline :  </h3>
+                    <p class="col-6"><%= flight.airline %></p>
                 </div> 
-                <div class="mb-12">
-                    <h1>Air No. : <%= flight.flightNo %> 
+                <div class="mb-12 list">
+                    <h3 class="col-6">Air No : </h3>
+                    <p class="col-6"><%= flight.flightNo %> </p>
                 </div>
 
-                <div class="mb-12">
-                    <h1>Departure : <%= depart%> 
+                <div class="mb-12 list">
+                    <h3 class="col-6">Depart:</h3>
+                    <p class="col-6"><%= depart %>  <span><%= time %> </span></p>
                 </div>
-                
-                <div>
-                    <a href="/single-flight/edit/<%= flight._id%>" class="btn btn-primary"> Edit</a>
+                <hr>
 
-                    <form action="/single-flight/delete-flight/<%= flight._id%>" method="POST">
+                <% if(flight.destinations.length > 0){ %> 
+                    <% flight.destinations.forEach(el => {%> 
+                <div class="mb-12 list">
+                    <h3 class="col-6">AirPort : </h3>
+                    <p class="col-6"><%= el.airport %> </p>
+                </div>
+
+                <div class="mb-12 list">
+                    <h3 class="col-6">Depart:</h3>
+                    <p class="col-6"><%= el.date %>  </p>
+                </div>
+                <% }); %> 
+                <% } else { %> 
+                    <h3>Please add destination...</h3>
+                <% } %> 
+
+
+                <div class="aform">
+                    <a href="/single-flight/edit/<%= flight._id%>" class="btn btn-primary" style="width: 140px;"> Edit</a>
+
+                    <form action="/single-flight/delete-flight/<%= flight._id%>" method="POST" >
                         <input type="hidden" name="flightId" value=<%= flight._id%> >
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit" style="width: 140px;">Delete</button>
                     </form>
                 </div>
             </div>
-      
-            <form action="/single-flight/<%= flight._id%>/add-arrival" method="POST">
+            
+            <form action="/single-flight/<%= flight._id%>/add-arrival" method="POST" class="card">
                 <div class="mb-12">
                     <label for="airline" class="form-label">Airport</label>
                     <select class="form-select" name="arrivalAirport" aria-label="Default select example" >
@@ -47,7 +69,7 @@
                     <label for="exampleFormControlInput1" class="form-label"> Arrival Date</label>
                     <input type="datetime-local" class="form-control"  name="arrivalDate" id="exampleFormControlInput1">
                 </div>
-                <button type="submit" class="btn btn-secondary btn-lg" >Add Arival</button>
+                <button type="submit" class="btn btn-secondary btn-lg b1" >Add Arrival</button>
             </form>
         </section>
         

@@ -45,7 +45,7 @@
                  <input type="datetime-local" class="form-control"  name="depart" id="exampleFormControlInput1" value= <%if (editing) {%><%= depart %> <%}else{%> <%= defaultDepart %> <% }%> >
              </div>
              <input type="hidden" name="flightId" value=<%if (editing) {%> <%= flight._id %> <%}else{%> <%=" "  %> <% }%> >
-             <button type="submit" class="btn btn-secondary btn-lg" ><%if (editing) {%> Update Flight <%}else{%> Add Flight<% }%></button>
+             <button type="submit" class="btn btn-secondary btn-lg b1" ><%if (editing) {%> Update Flight <%}else{%> Add Flight<% }%></button>
      </form>
      </div>
 </main>

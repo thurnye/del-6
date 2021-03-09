@@ -35,7 +35,7 @@ input, select{
   letter-spacing: 2px;
 }
 
-form button {
+form button, .b1 {
   width: -webkit-fill-available;
 }
 .flight{
@@ -54,4 +54,26 @@ section{
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+}
+.aform{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: baseline;
+  margin-bottom: 0;
+  margin-left: 3px;
+}
+.list p{
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+}
+
+hr{
+  border:2px solid black
 }

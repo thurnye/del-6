@@ -56,11 +56,13 @@ exports.getOneFlight = (req, res) => {
   .then(flight => {
     // console.log(flight)
     let d = flight.departs
-    // console.log(d)
+    let date = `${d.getFullYear()}-${d.getMonth()}-${d.getDay()}`;
+    let time = `${d.getHours()}Hrs ${d.getMinutes()}m`
   res.render('singleFlight',{
     pageTitle: "Single Flight",
-    depart: d.toISOString().slice(0, 16),
-    flight: flight
+    flight: flight,
+    depart: date,
+    time: time
   })
   })
   
