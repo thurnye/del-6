@@ -26,6 +26,7 @@
                 </div>
                 <hr>
 
+                <%# this is for the arrival %> 
                 <% if(flight.destinations.length > 0){ %> 
                     <% flight.destinations.forEach(el => {%>
                         <form action='/single-flight/delArrival' method='POST' class="removeSub">
@@ -39,13 +40,32 @@
                         </div>
 
                         <div class="mb-12 list">
-                            <h3 class="col-6">Depart:</h3>
+                            <h3 class="col-6">Arrival:</h3>
                             <p class="col-6"><%= el.date %>  </p>
                         </div>
                     <% }); %> 
                 <% } else { %> 
                     <h3>Please add destination...</h3>
                 <% } %> 
+
+
+                    <%# This is for the price and seat %> 
+                    <% if(flight.tickets.length > 0){ %> 
+                        <% flight.tickets.forEach(t => {%>
+                             <div class="mb-12 list">
+                                <h3 class="col-6">Price</h3>
+                                <p class="col-6">$<%= t.price%> </p>
+                            </div>
+    
+                            <div class="mb-12 list">
+                                <h3 class="col-6">Seat</h3>
+                                <p class="col-6"><%= t.seat %>  </p>
+                            </div>
+                        <% }); %> 
+                    <% } else { %> 
+                        <h3>Please add ticket...</h3>
+                    <% } %> 
+
 
 
                 <div class="aform">
@@ -76,6 +96,21 @@
                 </div>
                 <button type="submit" class="btn btn-secondary btn-lg b1" >Add Arrival</button>
             </form>
+
+
+            <form action="/single-flight/<%= flight._id%>/add-ticket" method="POST" class="card">
+                <div class="mb-12">
+                    <label for="exampleFormControlInput1" class="form-label"> Seat</label>
+                    <input name="seat"  class="form-control" id="exampleFormControlInput1" required pattern="[A-F][1-9]\d" >
+                </div>
+                <div class="mb-12">
+                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                    <input type="number" name="price" class="form-control" id="exampleFormControlInput1">
+                </div>
+                <button type="submit" class="btn btn-secondary btn-lg b1" >Add </button>
+            </form>
+
+
         </section>
         
 

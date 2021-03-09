@@ -21,4 +21,6 @@ router.post('/single-flight/:id/add-arrival', controller.postArrival)
 
 router.post('/single-flight/delArrival/', controller.postRemoveSub)
 
+router.post('/single-flight/:id/add-ticket', controller.postPriceAndSeat)
+
 module.exports = router;

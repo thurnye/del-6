@@ -1,8 +1,9 @@
 
 const Flight = require('../model/model');
+const Ticket = require('../model/ticketModel');
 
 
-
+//get all flights
 exports.getIndex = (req, res, next) => {
   Flight.find().sort({departs: 'asc'})
   .then(flight => {
@@ -14,6 +15,7 @@ exports.getIndex = (req, res, next) => {
   .catch( err => console.log(err))
 }
 
+//get the add form
 exports.getForm = (req, res, next) => {
   let d = new Date()
   d.setFullYear(new Date().getFullYear() -1)
@@ -25,6 +27,7 @@ exports.getForm = (req, res, next) => {
   });
 }
 
+//add new flight
 exports.postForm = (req, res, next) => {
   const airline = req.body.airline;
   const airport = req.body.airport;
@@ -35,11 +38,10 @@ exports.postForm = (req, res, next) => {
     airline : airline,
     airport : airport,
     flightNo : flightNo,
-    departs: depart 
+    departs: depart
   })
  flight.save()
  .then(flight => {
-  //  console.log(flight)
    res.redirect('/')
  })
  .catch(err=> {
@@ -48,11 +50,11 @@ exports.postForm = (req, res, next) => {
 }
 
 //get a single flight
-
 exports.getOneFlight = (req, res) => {
   let id = req.params.id
-  console.log(id)
-  Flight.findById(id)
+  // console.log(id)
+  Flight.findById(id).populate('tickets')
+  .exec()
   .then(flight => {
     console.log(flight)
     let d = flight.departs
@@ -66,7 +68,6 @@ exports.getOneFlight = (req, res) => {
     parentId: id
   })
   })
-  
 }
 
 
@@ -92,9 +93,6 @@ exports.postArrival = (req, res) => {
   const id =  req.params.id;
   const arrivalAirport = req.body.arrivalAirport;
   const arrivalDate = req.body.arrivalDate
-
-console.log(arrivalDate, arrivalAirport)
-
   Flight.findById(id)
   .then(result => {
     result.destinations.push({
@@ -102,35 +100,66 @@ console.log(arrivalDate, arrivalAirport)
       date: arrivalDate
     })
     result.save()
-    // console.log(result._id)
     res.redirect(`/single-flight/${result._id}`)
-    // console.log(result)
   })
   .catch(err => console.log(err))
 }
 
+//add price and seat using the async and wait
+exports.postPriceAndSeat = async (req, res) => {
+  try {
+  const id =  req.params.id;
+  const seat = req.body.seat;
+  const price = req. body.price;
+  console.log(id)
+
+  const ticket = new Ticket ({
+   seat: seat,
+   price: price,
+   flight: id
+  })
+  await ticket.save() 
+  
+  console.log(ticket)
+  let myflight = await Flight.findById(id)
+  myflight.tickets.push(ticket._id)
+  await myflight.save()
+  res.send('thank you for ')
+} catch(err){
+  // console.log(err)
+  res.send(err)
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+//remove subDocs from the array
 exports.postRemoveSub = (req, res) => {
   const id = req.body.delArrival
   const parent = req.body.parent
-  console.log(id)
-
-  // console.log(req)
   Flight.findById(parent)
   .then(flight => {
-    console.log(flight)
     flight.destinations.id(id).remove()
     flight.save()
     res.redirect(`/single-flight/${flight._id}`)
   })
-  .catch(err => console.log(err))
+  .catch(err => {
+    console.log(err)
+  })
 
 }
 
-
-
-
-
-
+//edit the flight departure
 exports.postEditUpdate = (req, res) => {
   const flightId = req.body.flightId
   const updatedAirline = req.body.airline;
@@ -156,8 +185,7 @@ exports.postEditUpdate = (req, res) => {
   })
 }
 
-//Delete one
-
+//Delete a flight
 exports.deleteFlight = (req, res) => {
   const id = req.body.flightId
   console.log(id)

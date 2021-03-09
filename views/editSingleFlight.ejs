@@ -24,17 +24,14 @@
              </div> 
 
              <div class="mb-12">
-                 <label for="airline" class="form-label">Airline</label>
-                 <select class="form-select" name="airline" aria-label="Default select example" >
+                <label for="airline" class="form-label">Airline</label>
+                <select class="form-select" name="airline" aria-label="Default select example" >
                      <option selected> <%if (editing) {%><%= flight.airline %> <%}else{%>select airport...<% }%></option>
                      <option value="America">America</option>
                      <option value="Southwest">Southwest</option>
                      <option value="United">United</option>
-                   </select>
+                </select>
              </div> 
-
-            
-
              <div class="mb-12">
                  <label for="exampleFormControlInput1" class="form-label"> Flight No.</label>
                  <input type="number" class="form-control" id="exampleFormControlInput1" name="flightNo" value=<%if (editing) {%><%= flight.flightNo %> <%}else{%> <%=" "  %> <% }%> >
